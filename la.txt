@@ -1,0 +1,96 @@
+--------------------------------LED Blinking-------------------------
+
+void setup() {
+	Serial.begin(9600);
+	Serial.println("LED is blinking");
+	pinMode(2,OUTPUT);
+	pinMode(3,OUTPUT);
+}
+void loop() {
+	digitalWrite(2,HIGH);
+	delay(500);
+	Serial.println("LED2 is turned ON");
+	digitalWrite(2,LOW);
+	delay(500);
+	Serial.println("LED2 is turned OFF");
+	digitalWrite(3,HIGH);
+	delay(500);
+	Serial.println("LED3 is turned ON");
+	digitalWrite(3,LOW);
+	delay(500);
+	Serial.println("LED3 is turned OFF");
+}
+
+--------------------------------LDR Sensor-------------------------
+
+int ldr = A0;
+int value;
+void setup() {
+	Serial.begin(9600);
+	pinMode(A1,OUTPUT);
+}
+void loop() {
+	value = analogRead(idr);
+	Serial.print("LDR value is :");
+	Serial.println(value);
+	if (value>300) {
+		digitalWrite(A1,HIGH);
+	}
+	else {
+		digitalWrite(A1,LOW);
+	}
+	delay(1000);
+}
+
+--------------------------------Temperature Sensor-------------------------
+
+int lm35_pin = A0;
+void setup() {
+	Serial.begin(9600);	
+}
+void loop() {
+	int temp_volts;
+	float temp_celsius;
+	temp_volts = analogRead(lm35_pin);
+	temp_celsius = temp_volts * 0.488;
+	Serial.print("Temperature is : " );
+	Serial.print(temp_celsius);
+	Serial.println(" Celsius");
+	delay(800);	
+}
+
+
+--------------------------------Smoke Sensor-------------------------
+
+int smoke_pin = A0;
+int thres_val;
+int smoke;
+void setup() {
+	Serial.begin(9600);
+	pinMode(7,OUTPUT);
+}
+void loop() {
+	smoke = analogRead(A0);
+	Serial.print("Smoke value : ");
+	Serial.println(smoke);
+	if(smoke > thres_val) {
+		Serial.println("Smoke Detected");
+		digitalWrite(LED_BULITIN,HIGH);
+		delay(1000);
+	}
+	else {
+		digitalWrite(7,HIGH);
+		delay(500);
+		digitalWrite(7,LOW);
+		delay(500);
+	}
+}
+
+
+
+
+
+
+
+
+
